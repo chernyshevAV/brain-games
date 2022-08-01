@@ -1,15 +1,15 @@
 <?php
 
-namespace Brain\Games\Brain\Calc;
+namespace Brain\Games\Games\Brain\Calc;
 
 use function cli\line;
 use function cli\prompt;
+use function Brain\Games\Engine\greeting;
+use function Brain\Games\Engine\isAnswerCorrect;
 
 function brainCalc()
 {
-    line('Welcome to the Brain Games!');
-    $name = prompt('May I have your name?');
-    line("Hello, %s!", $name);
+    $name = greeting();
 
     line('What is result of the expression?');
     $winStreakToWin = 3;
@@ -33,18 +33,11 @@ function brainCalc()
                 $correctAnswer = $randomNum1 * $randomNum2;
                 break;
         }
-        $answer = prompt("Your answer");
-        if ($answer == $correctAnswer) {
-            line('Correct!');
+        if (isAnswerCorrect($name, $correctAnswer)) {
             $wins += 1;
         } else {
-            line(
-                "'%s' is wrong answer ;(. Correct answer was '%s'.",
-                $answer,
-                $correctAnswer
-            );
             return line("Let's try again, %s!", $name);
         }
     }
-    line("Congratulations, %s!", $name);
+    return line("Congratulations, %s!", $name);
 }
