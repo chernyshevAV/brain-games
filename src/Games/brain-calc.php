@@ -7,6 +7,23 @@ use function cli\prompt;
 use function Brain\Games\Engine\greeting;
 use function Brain\Games\Engine\isAnswerCorrect;
 
+function getCorrectAnswer($operators)
+{
+    $firstNum = mt_rand(1, 20);
+    $secondNum = mt_rand(1, 20);
+    switch ($operators[0]) {
+        case '+':
+            line("Question: {$firstNum} + {$secondNum}");
+            return $firstNum + $secondNum;
+        case '-':
+            line("Question: {$firstNum} - {$secondNum}");
+            return $firstNum - $secondNum;
+        case '*':
+            line("Question: {$firstNum} * {$secondNum}");
+            return $firstNum * $secondNum;
+    }
+}
+
 function brainCalc()
 {
     $name = greeting();
@@ -16,23 +33,9 @@ function brainCalc()
     $wins = 0;
 
     while ($wins < $winStreakToWin) {
-        $randomNum1 = mt_rand(1, 20);
-        $randomNum2 = mt_rand(1, 20);
-        $randomExpression = mt_rand(1, 3);
-        switch ($randomExpression) {
-            case '1':
-                line("Question: {$randomNum1} + {$randomNum2}");
-                $correctAnswer = $randomNum1 + $randomNum2;
-                break;
-            case '2':
-                line("Question: {$randomNum1} - {$randomNum2}");
-                $correctAnswer = $randomNum1 - $randomNum2;
-                break;
-            case '3':
-                line("Question: {$randomNum1} * {$randomNum2}");
-                $correctAnswer = $randomNum1 * $randomNum2;
-                break;
-        }
+        $operators = ['+', '-', '*'];
+        shuffle($operators);
+        $correctAnswer = getCorrectAnswer($operators);
         if (isAnswerCorrect($name, $correctAnswer)) {
             $wins += 1;
         } else {
