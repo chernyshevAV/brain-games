@@ -29,7 +29,7 @@ function isAnswerCorrect(string $name, string $correctAnswer): bool
     }
 }
 
-function game(string $name, callable $game): string
+function game(string $name, callable $game): null
 {
     $winStreakToWin = 3;
     $wins = 0;
