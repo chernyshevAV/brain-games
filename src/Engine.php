@@ -29,7 +29,7 @@ function isAnswerCorrect($name, $correctAnswer)
     }
 }
 
-function getEven()
+function checkEven()
 {
     $number = mt_rand(1, 100);
     line("Question: {$number}");
@@ -104,4 +104,21 @@ function getProgression()
     $exerciseRow = implode(' ', $exerciseSlice);
     line("Question: {$exerciseRow}");
     return $answer;
+}
+
+function checkPrime()
+{
+    $randomNumber = mt_rand(1, 100);
+    line("Question: {$randomNumber}");
+    if ($randomNumber === 1) {
+        return 'no';
+    } elseif ($randomNumber === 2 || $randomNumber === 3) {
+        return 'yes';
+    }
+    for ($i = 2; $i < $randomNumber; $i++) {
+        if ($randomNumber % $i === 0) {
+            return 'no';
+        }
+    }
+    return 'yes';
 }
