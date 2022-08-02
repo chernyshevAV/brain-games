@@ -29,96 +29,18 @@ function isAnswerCorrect($name, $correctAnswer)
     }
 }
 
-function checkEven()
+function game($name, $game)
 {
-    $number = mt_rand(1, 100);
-    line("Question: {$number}");
-    return $number % 2 === 0 ? 'yes' : 'no';
-}
+    $winStreakToWin = 3;
+    $wins = 0;
 
-function getCalc()
-{
-    $operators = ['+', '-', '*'];
-    shuffle($operators);
-    $firstNum = mt_rand(1, 20);
-    $secondNum = mt_rand(1, 20);
-    switch ($operators[0]) {
-        case '+':
-            line("Question: {$firstNum} + {$secondNum}");
-            return $firstNum + $secondNum;
-        case '-':
-            line("Question: {$firstNum} - {$secondNum}");
-            return $firstNum - $secondNum;
-        case '*':
-            $firstNum = mt_rand(1, 10);
-            $secondNum = mt_rand(1, 10);
-            line("Question: {$firstNum} * {$secondNum}");
-            return $firstNum * $secondNum;
-    }
-}
-
-function getGcd()
-{
-    $firstNum = mt_rand(1, 50);
-    $secondNum = mt_rand(1, 50);
-    line("Question: {$firstNum} {$secondNum}");
-    while ($firstNum !== $secondNum) {
-        if ($firstNum > $secondNum) {
-            $firstNum = $firstNum - $secondNum;
+    while ($wins < $winStreakToWin) {
+        $correctAnswer = $game();
+        if (isAnswerCorrect($name, $correctAnswer)) {
+            $wins += 1;
         } else {
-            $secondNum = $secondNum - $firstNum;
+            return line("Let's try again, %s!", $name);
         }
     }
-    return $firstNum;
-}
-/* decision #2: getGcd()
-{
-    $firstNum = mt_rand(1, 100);
-    $secondNum = mt_rand(1, 100);
-    line("Question: {$firstNum} {$secondNum}");
-    if ($firstNum > $secondNum) {
-        $temp = $firstNum;
-        $firstNum = $secondNum;
-        $secondNum = $temp;
-    }
-    for ($i = 1; $i < $firstNum + 1; $i++) {
-        if ($firstNum % $i === 0 && $secondNum % $i === 0) {
-            $gcd = $i;
-        }
-    }
-    return $gcd;
-*/
-function getProgression()
-{
-    $randomStart = mt_rand(1, 20);
-    $randomStep = mt_rand(2, 10);
-    $digitColl = range(
-        $randomStart,
-        200,
-        $randomStep
-    );
-    $exerciseSlice = array_slice($digitColl, 0, mt_rand(5, 10));
-    $missingNumberIndex = mt_rand(0, count($exerciseSlice) - 1);
-    $answer = $exerciseSlice[$missingNumberIndex];
-    $exerciseSlice[$missingNumberIndex] = '..';
-    $exerciseRow = implode(' ', $exerciseSlice);
-    line("Question: {$exerciseRow}");
-    return $answer;
-}
-
-function checkPrime()
-{
-    $randomNumber = mt_rand(1, 100);
-    line("Question: {$randomNumber}");
-    if ($randomNumber === 1) {
-        return 'no';
-    } elseif ($randomNumber === 2 || $randomNumber === 3) {
-        return 'yes';
-    }
-    for ($i = 2; $i < $randomNumber; $i++) {
-        if ($randomNumber % $i === 0) {
-            return 'no';
-        }
-    }
-    return 'yes';
+    return line("Congratulations, %s!", $name);
 }

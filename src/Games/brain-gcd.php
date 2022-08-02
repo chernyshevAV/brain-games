@@ -5,24 +5,26 @@ namespace Brain\Games\Games\Brain\Gcd;
 use function cli\line;
 use function cli\prompt;
 use function Brain\Games\Engine\greeting;
-use function Brain\Games\Engine\isAnswerCorrect;
-use function Brain\Games\Engine\getGcd;
+use function Brain\Games\Engine\game;
 
 function brainGcd()
 {
     $name = greeting();
 
     line('Find the greatest common divisor of given numbers.');
-    $winStreakToWin = 3;
-    $wins = 0;
-
-    while ($wins < $winStreakToWin) {
-        $correctAnswer = getGcd();
-        if (isAnswerCorrect($name, $correctAnswer)) {
-            $wins += 1;
-        } else {
-            return line("Let's try again, %s!", $name);
+    
+    game($name, function()
+    {
+        $firstNum = mt_rand(1, 50);
+        $secondNum = mt_rand(1, 50);
+        line("Question: {$firstNum} {$secondNum}");
+        while ($firstNum !== $secondNum) {
+            if ($firstNum > $secondNum) {
+                $firstNum = $firstNum - $secondNum;
+            } else {
+                $secondNum = $secondNum - $firstNum;
         }
     }
-    return line("Congratulations, %s!", $name);
+    return $firstNum;
+    });
 }
