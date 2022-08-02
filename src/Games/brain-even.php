@@ -6,6 +6,7 @@ use function cli\line;
 use function cli\prompt;
 use function Brain\Games\Engine\greeting;
 use function Brain\Games\Engine\isAnswerCorrect;
+use function Brain\Games\Engine\getEven;
 
 function brainEven()
 {
@@ -16,9 +17,7 @@ function brainEven()
     $wins = 0;
 
     while ($wins < $winStreakToWin) {
-        $randomNum = mt_rand(1, 100);
-        line("Question: {$randomNum}");
-        $correctAnswer = $randomNum % 2 === 0 ? 'yes' : 'no';
+        $correctAnswer = getEven();
         if (isAnswerCorrect($name, $correctAnswer)) {
             $wins += 1;
         } else {
