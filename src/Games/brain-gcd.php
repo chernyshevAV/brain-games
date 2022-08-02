@@ -12,9 +12,7 @@ function brainGcd()
     $name = greeting();
 
     line('Find the greatest common divisor of given numbers.');
-    
-    game($name, function()
-    {
+    game($name, function () {
         $firstNum = mt_rand(1, 50);
         $secondNum = mt_rand(1, 50);
         line("Question: {$firstNum} {$secondNum}");
@@ -23,8 +21,8 @@ function brainGcd()
                 $firstNum = $firstNum - $secondNum;
             } else {
                 $secondNum = $secondNum - $firstNum;
+            }
         }
-    }
-    return $firstNum;
+        return $firstNum;
     });
 }

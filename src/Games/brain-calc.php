@@ -12,8 +12,7 @@ function brainCalc()
     $name = greeting();
 
     line('What is result of the expression?');
-    game($name, function()
-    {
+    game($name, function () {
         $operators = ['+', '-', '*'];
         shuffle($operators);
         $firstNum = mt_rand(1, 20);

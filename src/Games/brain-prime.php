@@ -12,8 +12,7 @@ function brainPrime()
     $name = greeting();
 
     line('Answer "yes" if given number is prime. Otherwise answer "no"');
-    game($name, function()
-    {
+    game($name, function () {
         $randomNumber = mt_rand(1, 100);
         line("Question: {$randomNumber}");
         if ($randomNumber === 1) {

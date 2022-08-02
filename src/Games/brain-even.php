@@ -12,8 +12,7 @@ function brainEven()
     $name = greeting();
 
     line('Answer "yes" if the number is even, otherwise answer "no".');
-    game($name, function()
-    {
+    game($name, function () {
         $number = mt_rand(1, 100);
         line("Question: {$number}");
         return $number % 2 === 0 ? 'yes' : 'no';

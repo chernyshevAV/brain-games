@@ -12,8 +12,7 @@ function brainProgression()
     $name = greeting();
 
     line('What number is missing in the progression?');
-    game($name, function()
-    {
+    game($name, function () {
         $randomStart = mt_rand(1, 20);
         $randomStep = mt_rand(2, 10);
         $definiteEnd = 200;
