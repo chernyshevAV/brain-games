@@ -13,7 +13,7 @@ function greeting()
     return $name;
 }
 
-function isAnswerCorrect($name, $correctAnswer)
+function isAnswerCorrect(string $name, string $correctAnswer): bool
 {
     $answer = strtolower(prompt("Your answer"));
     if ($answer == $correctAnswer) {
@@ -29,7 +29,7 @@ function isAnswerCorrect($name, $correctAnswer)
     }
 }
 
-function game($name, $game)
+function game(string $name, callable $game): string
 {
     $winStreakToWin = 3;
     $wins = 0;
