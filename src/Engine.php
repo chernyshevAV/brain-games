@@ -5,6 +5,7 @@ namespace Brain\Games\Engine;
 use function cli\line;
 use function cli\prompt;
 
+// function to find out and save the username
 function greeting()
 {
     line('Welcome to the Brain Games!');
@@ -12,11 +13,11 @@ function greeting()
     line("Hello, %s!", $name);
     return $name;
 }
-
+//get user's answer and compare it with correct answer
 function isAnswerCorrect(string $name, string $correctAnswer): bool
 {
     $answer = strtolower(prompt("Your answer"));
-    if ($answer == $correctAnswer) {
+    if ($answer === $correctAnswer) {
         line('Correct!');
         return true;
     } else {
@@ -28,14 +29,19 @@ function isAnswerCorrect(string $name, string $correctAnswer): bool
         return false;
     }
 }
-
+//core game logic
 function game(string $name, callable $game)
 {
     $winStreakToWin = 3;
     $wins = 0;
 
-    while ($wins < $winStreakToWin) {
+    while ($wins < $winStreakToWin) { //win counter
+        /*
+        calling a specific game as a callback function
+        to display game questions to the user and get correct answer
+        */
         $correctAnswer = $game();
+        // get the user's answer and check it
         if (isAnswerCorrect($name, $correctAnswer)) {
             $wins += 1;
         } else {

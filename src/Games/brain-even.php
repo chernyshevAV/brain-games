@@ -7,6 +7,7 @@ use function cli\prompt;
 use function Brain\Games\Engine\greeting;
 use function Brain\Games\Engine\game;
 
+// parity check
 function brainEven()
 {
     $name = greeting();
