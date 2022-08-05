@@ -17,14 +17,14 @@ function brainPrime()
         $randomNumber = mt_rand(1, 100);
         line("Question: {$randomNumber}");
         //check: 1 is not a prime number
-        if ($randomNumber === 1) {
+        if ($randomNumber < 2) {
             return 'no';
         }
         /*
         check that the prime number is not divisible
         by a smaller number without a remainder
         */
-        for ($i = 2; $i < $randomNumber; $i++) {
+        for ($i = 2; $i <= $randomNumber / 2; $i++) {
             if ($randomNumber % $i === 0) {
                 return 'no';
             }
